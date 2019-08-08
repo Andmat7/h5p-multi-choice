@@ -48,12 +48,12 @@ var H5P = H5P || {};
  * @param {Options} options
  * @param {number} contentId
  * @param {Object} contentData
- * @returns {H5P.MultiChoice}
+ * @returns {H5P.MultiChoiceIDO}
  * @constructor
  */
-H5P.MultiChoice = function (options, contentId, contentData) {
-  if (!(this instanceof H5P.MultiChoice))
-    return new H5P.MultiChoice(options, contentId, contentData);
+H5P.MultiChoiceIDO = function (options, contentId, contentData) {
+  if (!(this instanceof H5P.MultiChoiceIDO))
+    return new H5P.MultiChoiceIDO(options, contentId, contentData);
   var self = this;
   this.contentId = contentId;
   this.contentData = contentData;
@@ -216,6 +216,12 @@ H5P.MultiChoice = function (options, contentId, contentData) {
         if (params.media.params.sources) {
           // Register task video
           self.setVideo(params.media);
+        }
+      }
+      else if (type === 'H5P.Audio') {
+        if (params.media.params) {
+          // Register task audio
+          self.setAudio(params.media);
         }
       }
     }
@@ -1052,9 +1058,9 @@ H5P.MultiChoice = function (options, contentId, contentData) {
     }
   }
 
-  H5P.MultiChoice.counter = (H5P.MultiChoice.counter === undefined ? 0 : H5P.MultiChoice.counter + 1);
+  H5P.MultiChoiceIDO.counter = (H5P.MultiChoiceIDO.counter === undefined ? 0 : H5P.MultiChoiceIDO.counter + 1);
   params.role = (params.behaviour.singleAnswer ? 'radiogroup' : 'group');
-  params.label = 'h5p-mcq' + H5P.MultiChoice.counter;
+  params.label = 'h5p-mcq' + H5P.MultiChoiceIDO.counter;
 
   /**
    * Pack the current state of the interactivity into a object that can be
@@ -1098,5 +1104,5 @@ H5P.MultiChoice = function (options, contentId, contentData) {
   };
 };
 
-H5P.MultiChoice.prototype = Object.create(H5P.Question.prototype);
-H5P.MultiChoice.prototype.constructor = H5P.MultiChoice;
+H5P.MultiChoiceIDO.prototype = Object.create(H5P.Question.prototype);
+H5P.MultiChoiceIDO.prototype.constructor = H5P.MultiChoiceIDO;
