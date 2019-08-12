@@ -57,7 +57,7 @@ H5P.MultiChoiceIDO = function (options, contentId, contentData) {
   var self = this;
   this.contentId = contentId;
   this.contentData = contentData;
-  H5P.Question.call(self, 'multichoice');
+  H5P.QuestionIDO.call(self, 'multichoice');
   var $ = H5P.jQuery;
 
   // checkbox or radiobutton
@@ -197,7 +197,7 @@ H5P.MultiChoiceIDO = function (options, contentId, contentData) {
   };
 
   /**
-   * Register the different parts of the task with the H5P.Question structure.
+   * Register the different parts of the task with the H5P.QuestionIDO structure.
    */
   self.registerDomElements = function () {
     if (params.media && params.media.library) {
@@ -743,7 +743,7 @@ H5P.MultiChoiceIDO = function (options, contentId, contentData) {
   var getFeedbackText = function (score, max) {
     var ratio = (score / max);
 
-    var feedback = H5P.Question.determineOverallFeedback(params.overallFeedback, ratio);
+    var feedback = H5P.QuestionIDO.determineOverallFeedback(params.overallFeedback, ratio);
 
     return feedback.replace('@score', score).replace('@total', max);
   };
@@ -756,7 +756,7 @@ H5P.MultiChoiceIDO = function (options, contentId, contentData) {
   this.showCheckSolution = function (skipFeedback) {
     var scorePoints;
     if (!(params.behaviour.singleAnswer || params.behaviour.singlePoint || !params.behaviour.showScorePoints)) {
-      scorePoints = new H5P.Question.ScorePoints();
+      scorePoints = new H5P.QuestionIDO.ScorePoints();
     }
 
     $myDom.find('.h5p-answer').each(function (i, e) {
@@ -1104,5 +1104,5 @@ H5P.MultiChoiceIDO = function (options, contentId, contentData) {
   };
 };
 
-H5P.MultiChoiceIDO.prototype = Object.create(H5P.Question.prototype);
+H5P.MultiChoiceIDO.prototype = Object.create(H5P.QuestionIDO.prototype);
 H5P.MultiChoiceIDO.prototype.constructor = H5P.MultiChoiceIDO;
